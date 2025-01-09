@@ -16,7 +16,7 @@ jobs:
     - name: 构建编译内核环境
       run: |
         sudo apt-get update
-        sudo -E apt-get -y -qq install git make bc bison ccache openssl dos2unix zip kmod cpio flex libelf-dev curl libssl-dev libtfm-dev wget device-tree-compiler ca-certificates python3 python2 binutils binutils-aarch64-linux-gnu binutils-arm-linux-gnueabi
+        sudo -E apt-get -y -qq install git make bc bison ccache openssl dos2unix zip kmod cpio flex libelf-dev curl libssl-dev libtfm-dev wget device-tree-compiler ca-certificates python3 binutils binutils-aarch64-linux-gnu binutils-arm-linux-gnueabi
         mkdir -p $GITHUB_WORKSPACE/kernel_workspace
 
 
@@ -54,7 +54,16 @@ jobs:
         rm -rf KernelSU
         curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -
 
-               
+#    - name: 配置susfs
+#      run: |
+#        cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
+#        git clone -b kernel-4.14 https://gitlab.com/simonpunk/susfs4ksu
+#        export KERNEL_REPO=$(pwd)
+#        cd susfs4ksu/
+#        cp ./kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_REPO/KernelSU-Next/
+#        cp ./kernel_patches/50_add_susfs_in_gki-android12-5.10.patch $KERNEL_REPO/common/
+        
+        
     - name: 设置ccache缓存
       uses: hendrikmuhs/ccache-action@v1.2
       with:
