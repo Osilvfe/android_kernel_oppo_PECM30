@@ -1,11 +1,11 @@
-# android_kernel_OPPO/Realme_mtk6853
-OPPO/Realme通用内核
+# android_kernel_oppo_PECM30
 
+Kernel vesion:4.14.186
 
 *适用:*
 
-系统版本:安卓12
+系统版本:Android12
+修补了bfs以准备使用Android13+的ROM
 
-内核版本:4.14.186
 
-处理器:天玑720/天玑800u 代号mtk6853
+
