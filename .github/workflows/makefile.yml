@@ -66,7 +66,7 @@ jobs:
         cd $KERNEL_ROOT/KernelSU-Next
         patch -p1 < 10_enable_susfs_for_ksu.patch || true
         cd $KERNEL_ROOT
-        patch -p1 < 50_add_susfs_in_kernel.patch || true
+        patch -p1 < 50_add_susfs_in_kernel.patch-4.14 || true
         
     - name: 设置ccache缓存
       uses: hendrikmuhs/ccache-action@v1.2
