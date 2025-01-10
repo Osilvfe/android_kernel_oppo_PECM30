@@ -64,8 +64,9 @@ jobs:
         cp ./kernel_patches/fs/* $KERNEL_ROOT/fs/
         cp ./kernel_patches/include/linux/* $KERNEL_ROOT/include/linux/
         cd $KERNEL_ROOT/KernelSU-Next
-        patch -p1 < 10_enable_susfs_for_ksu.patch
-        
+        patch -p1 < 10_enable_susfs_for_ksu.patch || true
+        cd $KERNEL_ROOT
+        patch -p1 < 50_add_susfs_in_kernel.patch || true
         
     - name: 设置ccache缓存
       uses: hendrikmuhs/ccache-action@v1.2
