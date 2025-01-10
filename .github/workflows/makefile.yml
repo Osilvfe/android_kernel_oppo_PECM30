@@ -51,17 +51,20 @@ jobs:
     - name: 更新 ksu
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
-        rm -rf KernelSU
         curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -
 
-#    - name: 配置susfs
-#      run: |
-#        cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
-#        git clone -b kernel-4.14 https://gitlab.com/simonpunk/susfs4ksu
-#        export KERNEL_REPO=$(pwd)
-#        cd susfs4ksu/
-#        cp ./kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_REPO/KernelSU-Next/
-#        cp ./kernel_patches/50_add_susfs_in_gki-android12-5.10.patch $KERNEL_REPO/common/
+    - name: 配置susfs
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
+        git clone -b kernel-4.14 https://gitlab.com/simonpunk/susfs4ksu
+        export KERNEL_ROOT=$(pwd)
+        cd susfs4ksu/
+        cp ./kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch $KERNEL_ROOT/KernelSU-Next/
+        cp ./kernel_patches/50_add_susfs_in_kernel-4.14.patch $KERNEL_ROOT/
+        cp ./kernel_patches/fs/* $KERNEL_ROOT/fs/
+        cp ./kernel_patches/include/linux/* $KERNEL_ROOT/include/linux/
+        cd $KERNEL_ROOT/KernelSU
+        patch -p1 < 10_enable_susfs_for_ksu.patch
         
         
     - name: 设置ccache缓存
